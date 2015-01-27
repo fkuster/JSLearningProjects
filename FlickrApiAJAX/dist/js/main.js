@@ -1,7 +1,14 @@
 var main= function(){
-
+var hash=$('#hashtag');
 console.log("File loaded");
-var url="http://api.flickr.com/services/feeds/photos_public.gne?" + "tags=dogs&format=json&jsoncallback=?";
+hash.keypress(function( event ) {
+  if ( event.which === 13&&$(hash.val()!=='') ) {
+
+     event.preventDefault();
+			var url="http://api.flickr.com/services/feeds/photos_public.gne?" + "tags="+$('#hashtag').val()+"&format=json&jsoncallback=?";
+
+$('.container2').empty();
+hash.empty();
 $.getJSON(url, function (flickrResponse) {
 		var responseDiv=$("<div>");
 		var i=1;
@@ -35,6 +42,10 @@ $.getJSON(url, function (flickrResponse) {
 			});
 		$('.container2').append(responseDiv);
 		});
-};
+}
+
+	});
+}
+
 
 $(document).ready(main);
